@@ -7,6 +7,7 @@
       "namespace": "android_app",
       "package_name": "com.viewsonic.classswift",
       "sha256_cert_fingerprints": [
+ 	"25:52:2B:4A:F0:D2:D9:C3:13:25:16:C1:CC:22:B4:30:31:CE:95:A1:3A:F3:D6:D5:2F:F4:58:9E:E2:60:91:1E",
         "48:78:9A:01:CA:0F:1A:89:EB:C4:17:14:40:D5:62:2F:0A:1D:30:AA:74:CA:97:F5:99:DC:7B:8A:56:35:FD:A3"
       ]
     }
@@ -20,7 +21,7 @@
       "package_name": "com.viewsonic.classswift.stag",
       "sha256_cert_fingerprints": [
         "25:52:2B:4A:F0:D2:D9:C3:13:25:16:C1:CC:22:B4:30:31:CE:95:A1:3A:F3:D6:D5:2F:F4:58:9E:E2:60:91:1E",
-	"7F:D2:CE:A3:0C:3A:60:22:EB:29:41:9C:E8:F6:F9:2C:E8:A4:BD:35:B0:CC:87:9E:D3:CC:A6:CB:F5:E9:99:2D"
+	"48:78:9A:01:CA:0F:1A:89:EB:C4:17:14:40:D5:62:2F:0A:1D:30:AA:74:CA:97:F5:99:DC:7B:8A:56:35:FD:A3"
       ]
     }
   }
