@@ -1,13 +1,32 @@
 [
-  {
-    "relation": [
-      "delegate_permission/common.handle_all_urls"
-    ],
-    "target": {
-      "namespace": "android_app",
-      "package_name": "com.viewsonic.classswift.stag",
-      "sha256_cert_fingerprints": [
-        "A8:8F:4B:60:C8:3E:D9:70:7D:58:01:01:D1:2A:B6:27:C4:5A:43:74:F8:0B:01:63:1F:6B:8A:B3:A8:99:63:86"]
+  [
+    {
+      "relation": [
+        "delegate_permission/common.handle_all_urls"
+      ],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "com.viewsonic.classswift",
+        "sha256_cert_fingerprints": [
+          "A8:8F:4B:60:C8:3E:D9:70:7D:58:01:01:D1:2A:B6:27:C4:5A:43:74:F8:0B:01:63:1F:6B:8A:B3:A8:99:63:86",
+          "48:78:9A:01:CA:0F:1A:89:EB:C4:17:14:40:D5:62:2F:0A:1D:30:AA:74:CA:97:F5:99:DC:7B:8A:56:35:FD:A3"
+        ]
+      }
     }
-  }
+  ],
+  [
+    {
+      "relation": [
+        "delegate_permission/common.handle_all_urls"
+      ],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "com.viewsonic.classswift.stag",
+        "sha256_cert_fingerprints": [
+          "A8:8F:4B:60:C8:3E:D9:70:7D:58:01:01:D1:2A:B6:27:C4:5A:43:74:F8:0B:01:63:1F:6B:8A:B3:A8:99:63:86",
+          "48:78:9A:01:CA:0F:1A:89:EB:C4:17:14:40:D5:62:2F:0A:1D:30:AA:74:CA:97:F5:99:DC:7B:8A:56:35:FD:A3"
+        ]
+      }
+    }
+  ]
 ]
