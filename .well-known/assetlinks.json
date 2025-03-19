@@ -1,56 +1,58 @@
 [
-   {
-      "relation": [
-        "delegate_permission/common.handle_all_urls"
-      ],
-      "target": {
-        "namespace": "android_app",
-        "package_name": "com.viewsonic.classswift",
-        "sha256_cert_fingerprints": [
-          "A8:8F:4B:60:C8:3E:D9:70:7D:58:01:01:D1:2A:B6:27:C4:5A:43:74:F8:0B:01:63:1F:6B:8A:B3:A8:99:63:86",
-          "48:78:9A:01:CA:0F:1A:89:EB:C4:17:14:40:D5:62:2F:0A:1D:30:AA:74:CA:97:F5:99:DC:7B:8A:56:35:FD:A3",
-          "FA:F5:5F:0E:9F:81:BB:F6:2F:F7:B6:66:00:26:67:5B:82:9A:6A:E7:BB:79:03:08:DC:8E:B3:30:6D:28:F5:40"
-        ]
-      }
-    },
-   {
-      "relation":[
-         "delegate_permission/common.handle_all_urls"
-      ],
-      "target":{
-         "namespace":"android_app",
-         "package_name":"com.viewsonic.classswift.stag",
-         "sha256_cert_fingerprints":[
-            "A8:8F:4B:60:C8:3E:D9:70:7D:58:01:01:D1:2A:B6:27:C4:5A:43:74:F8:0B:01:63:1F:6B:8A:B3:A8:99:63:86",
-            "48:78:9A:01:CA:0F:1A:89:EB:C4:17:14:40:D5:62:2F:0A:1D:30:AA:74:CA:97:F5:99:DC:7B:8A:56:35:FD:A3"
-         ]
-      }
-   },
-   {
-      "relation": [
-        "delegate_permission/common.handle_all_urls"
-      ],
-      "target": {
-        "namespace": "android_app",
-        "package_name": "com.viewsonic.classswift.aosp",
-        "sha256_cert_fingerprints": [
-          "A8:8F:4B:60:C8:3E:D9:70:7D:58:01:01:D1:2A:B6:27:C4:5A:43:74:F8:0B:01:63:1F:6B:8A:B3:A8:99:63:86",
-          "48:78:9A:01:CA:0F:1A:89:EB:C4:17:14:40:D5:62:2F:0A:1D:30:AA:74:CA:97:F5:99:DC:7B:8A:56:35:FD:A3",
-          "FA:F5:5F:0E:9F:81:BB:F6:2F:F7:B6:66:00:26:67:5B:82:9A:6A:E7:BB:79:03:08:DC:8E:B3:30:6D:28:F5:40"
-        ]
-      }
-    },
-   {
-      "relation":[
-         "delegate_permission/common.handle_all_urls"
-      ],
-      "target":{
-         "namespace":"android_app",
-         "package_name":"com.viewsonic.classswift.asop.stag",
-         "sha256_cert_fingerprints":[
-            "A8:8F:4B:60:C8:3E:D9:70:7D:58:01:01:D1:2A:B6:27:C4:5A:43:74:F8:0B:01:63:1F:6B:8A:B3:A8:99:63:86",
-            "48:78:9A:01:CA:0F:1A:89:EB:C4:17:14:40:D5:62:2F:0A:1D:30:AA:74:CA:97:F5:99:DC:7B:8A:56:35:FD:A3"
-         ]
-      }
-   }
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.viewsonic.classswift",
+      "sha256_cert_fingerprints": [
+        "A8:8F:4B:60:C8:3E:D9:70:7D:58:01:01:D1:2A:B6:27:C4:5A:43:74:F8:0B:01:63:1F:6B:8A:B3:A8:99:63:86",
+        "48:78:9A:01:CA:0F:1A:89:EB:C4:17:14:40:D5:62:2F:0A:1D:30:AA:74:CA:97:F5:99:DC:7B:8A:56:35:FD:A3",
+        "FA:F5:5F:0E:9F:81:BB:F6:2F:F7:B6:66:00:26:67:5B:82:9A:6A:E7:BB:79:03:08:DC:8E:B3:30:6D:28:F5:40"
+      ]
+    }
+  },
+  {
+    "relation":[
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target":{
+      "namespace":"android_app",
+      "package_name":"com.viewsonic.classswift.stag",
+      "sha256_cert_fingerprints":[
+        "A8:8F:4B:60:C8:3E:D9:70:7D:58:01:01:D1:2A:B6:27:C4:5A:43:74:F8:0B:01:63:1F:6B:8A:B3:A8:99:63:86",
+        "48:78:9A:01:CA:0F:1A:89:EB:C4:17:14:40:D5:62:2F:0A:1D:30:AA:74:CA:97:F5:99:DC:7B:8A:56:35:FD:A3"
+      ]
+    }
+  },
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.viewsonic.classswift.aosp",
+      "sha256_cert_fingerprints": [
+        "A8:8F:4B:60:C8:3E:D9:70:7D:58:01:01:D1:2A:B6:27:C4:5A:43:74:F8:0B:01:63:1F:6B:8A:B3:A8:99:63:86",
+        "48:78:9A:01:CA:0F:1A:89:EB:C4:17:14:40:D5:62:2F:0A:1D:30:AA:74:CA:97:F5:99:DC:7B:8A:56:35:FD:A3",
+        "FA:F5:5F:0E:9F:81:BB:F6:2F:F7:B6:66:00:26:67:5B:82:9A:6A:E7:BB:79:03:08:DC:8E:B3:30:6D:28:F5:40",
+        "8E:76:71:58:BD:85:8C:0E:A3:40:D5:8A:8B:FE:C1:DC:4E:A4:51:1D:5B:4E:C0:BA:1C:D9:BD:53:DD:04:F5:95"
+      ]
+    }
+  },
+  {
+    "relation":[
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target":{
+      "namespace":"android_app",
+      "package_name":"com.viewsonic.classswift.aosp.stag",
+      "sha256_cert_fingerprints":[
+        "A8:8F:4B:60:C8:3E:D9:70:7D:58:01:01:D1:2A:B6:27:C4:5A:43:74:F8:0B:01:63:1F:6B:8A:B3:A8:99:63:86",
+        "48:78:9A:01:CA:0F:1A:89:EB:C4:17:14:40:D5:62:2F:0A:1D:30:AA:74:CA:97:F5:99:DC:7B:8A:56:35:FD:A3",
+        "8E:76:71:58:BD:85:8C:0E:A3:40:D5:8A:8B:FE:C1:DC:4E:A4:51:1D:5B:4E:C0:BA:1C:D9:BD:53:DD:04:F5:95"
+      ]
+    }
+  }
 ]
