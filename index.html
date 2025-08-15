@@ -49,7 +49,29 @@
     <div class="container">
         <h1>歡迎來到我們的網站！</h1>
         <p>我們很高興能夠為您提供服務，請探索我們的內容。</p>
-        <a href="applinks" class="button">開始瀏覽</a>
+        <button id="btnAppLink" class="primary">開始瀏覽</a>
     </div>
+
+      <script>
+    // ===== 取得 URL 中的 code 參數 =====
+    function getQueryParam(name) {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(name);
+    }
+
+    let code = getQueryParam("code");
+    if (!code) code = ""; // 如果是 null 或空值，設為空字串
+
+    document.getElementById("codeValue").textContent = code || "（空字串）";
+
+    // ===== 將 code 加入基礎 URL =====
+    const APP_LINK_BASE = `https://applinks-hh2xr.kinsta.page/applinks/?code=${encodeURIComponent(code)}`;
+
+    // ===== 點擊事件 =====
+    document.getElementById("btnAppLink").addEventListener("click", () => {
+      window.location.href = APP_LINK_BASE;
+    });
+
+  </script>
 </body>
 </html>
