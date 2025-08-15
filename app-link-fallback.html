@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  />
+  <title>開啟 App</title>
+  <style>
+    :root { --gap: 14px; --radius: 14px; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", Arial, "PingFang TC", "Microsoft JhengHei", sans-serif; margin: 0; background: #0b1020; color: #e8ebff; }
+    .wrap { max-width: 640px; margin: 0 auto; padding: 24px; }
+    .card { background: #121836; border: 1px solid #1e2755; border-radius: var(--radius); padding: 22px; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+    h1 { margin: 0 0 8px; font-size: 22px; }
+    p { margin: 8px 0 0; line-height: 1.6; color: #b7c0ff; }
+    .hint { margin-top: 10px; font-size: 13px; color: #99a3ff; }
+    .btns { display: grid; grid-template-columns: 1fr; gap: var(--gap); margin-top: 18px; }
+    @media (min-width: 520px) {
+      .btns { grid-template-columns: 1fr 1fr; }
+    }
+    button, a.btn {
+      appearance: none; border: 1px solid #3340a0; background: #1a237e; color: #fff; 
+      padding: 12px 16px; border-radius: 12px; font-size: 16px; cursor: pointer; text-decoration: none; text-align: center;
+    }
+    button.primary, a.primary { background: #2d39b4; border-color: #3b48d2; font-weight: 600; }
+    button:disabled { opacity: .6; cursor: not-allowed; }
+    .hidden { display: none; }
+    .footer { margin-top: 18px; font-size: 12px; color: #8d96ff; }
+    code { background: #0f1534; padding: 2px 6px; border-radius: 8px; border: 1px solid #1f2760; }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="card">
+      <h1>正在嘗試開啟 App…</h1>
+      <p id="status">若未自動跳轉，請點「再試一次」</p>
+
+      <div class="btns" style="margin-top:16px">
+        <button id="btnRetry" class="primary hidden">再試一次</button>
+        <button id="btnRetryIntent" class="hidden">Android 後備啟動（intent://）</button>
+        <a id="btnOpenWeb" class="btn" href="#" rel="nofollow">開網頁版</a>
+        <a id="btnDownload" class="btn" href="#" rel="nofollow">下載 App</a>
+      </div>
+
+      <p class="hint">
+        如果仍然無法開啟，可能是 Android「開啟支援的連結」被關閉或 App Link 尚未驗證。<br />
+        請在系統設定 > App >（你的 App）>「預設開啟」確認 <code>開啟支援的連結</code> 已啟用。
+      </p>
+
+      <div class="footer">
+        本頁面會先嘗試使用 App Link（HTTPS）。按鈕點擊屬於使用者手勢，成功率更高；Android 另提供 <code>intent://</code> 後備方案。
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // ====== 可調整區（請依你的專案改掉這些 URL 與參數）======
+    // 你的 App Link（Android App Links / iOS Universal Links）— 建議帶上你要的路徑、查詢參數等
+    const APP_LINK_URL = "https://applinks-hh2xr.kinsta.page/applinks?code=pt39jaYm018y_nQuwktxS3GNqpTxOL12j_NX9WxAvrA";
+
+    // Android 專用的 intent 後備（提高啟動率；需填你的 package 與可選的 fallback）
+    // 注意：若你走的是 App Links/Universal Links，scheme 仍是 https，這裡 intent 的 scheme 可留 https
+    const ANDROID_INTENT_URL =
+      "intent://app-link.example.com/deeplink?from=web#Intent;scheme=https;package=com.example.app;S.browser_fallback_url=https%3A%2F%2Fexample.com%2Fdownload;end";
+
+
+    // 自動嘗試的等待時間（毫秒）：在這段時間內切到背景就視為成功，否則顯示重試 UI
+    const AUTOTRY_TIMEOUT = 1500;
+
+    // ====== 環境與狀態 =======
+    const ua = navigator.userAgent || "";
+    const isAndroid = /Android/i.test(ua);
+    const isIOS = /iPhone|iPad|iPod/i.test(ua);
+    const isMobile = isAndroid || isIOS;
+
+    let switchedAway = false;    // 透過 visibility / pagehide 估算是否切到 App
+    let autoTried = false;       // 僅自動嘗試一次
+    let autoTimer = null;
+
+    const $status = document.getElementById("status");
+    const $btnRetry = document.getElementById("btnRetry");
+    const $btnRetryIntent = document.getElementById("btnRetryIntent");
+    const $btnOpenWeb = document.getElementById("btnOpenWeb");
+    const $btnDownload = document.getElementById("btnDownload");
+
+    // 設定備援按鈕連結
+    $btnOpenWeb.href = WEB_FALLBACK_URL;
+    $btnDownload.href = STORE_URL;
+
+    // ====== 事件：偵測是否切換頁面（可能成功打開 App）======
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) switchedAway = true;
+    });
+    // Safari / iOS 補強
+    window.addEventListener("pagehide", () => { switchedAway = true; });
+
+    // ====== 嘗試開啟 App（App Link 版）======
+    function openAppLink(userGesture = false) {
+      // userGesture = true 表示由使用者點擊觸發（在 iOS/Android 較不易被阻擋）
+      try {
+        if (userGesture) {
+          // 使用 replace 可避免留在歷史紀錄中
+          location.replace(APP_LINK_URL);
+        } else {
+          // 非使用者手勢先用 href，部份瀏覽器會限制自啟
+          location.href = APP_LINK_URL;
+        }
+      } catch (e) {
+        console.warn("openAppLink error:", e);
+      }
+    }
+
+    // ====== 嘗試開啟 App（Android intent 後備）======
+    function openAndroidIntent() {
+      if (!isAndroid) return;
+      try {
+        location.href = ANDROID_INTENT_URL;
+      } catch (e) {
+        console.warn("openAndroidIntent error:", e);
+      }
+    }
+
+    // ====== UI 控制 =======
+    function showRetryUI() {
+      $btnRetry.classList.remove("hidden");
+      if (isAndroid) $btnRetryIntent.classList.remove("hidden");
+      $status.textContent = "未自動跳轉，請點「再試一次」";
+    }
+
+    function hideRetryUI() {
+      $btnRetry.classList.add("hidden");
+      $btnRetryIntent.classList.add("hidden");
+    }
+
+    // ====== 綁定按鈕事件 =======
+    $btnRetry.addEventListener("click", () => {
+      hideRetryUI();
+      $status.textContent = "正在嘗試開啟 App…";
+      openAppLink(true);
+      // 再設一個短暫計時器，若仍未離開頁面則再把 UI 顯示回來
+      setTimeout(() => {
+        if (!switchedAway) showRetryUI();
+      }, 1200);
+    });
+
+    $btnRetryIntent.addEventListener("click", () => {
+      hideRetryUI();
+      $status.textContent = "正在以 intent:// 後備嘗試開啟 App…";
+      openAndroidIntent();
+      setTimeout(() => {
+        if (!switchedAway) showRetryUI();
+      }, 1200);
+    });
+
+    // ====== 首次自動嘗試 =======
+    function autoTryOnce() {
+      if (autoTried) return;
+      autoTried = true;
+
+      // 僅在行動裝置上自動嘗試；桌機多半要顯示 QR 或導向 Web 版
+      if (!isMobile) {
+        $status.textContent = "偵測到桌機環境，建議使用手機開啟或改用網頁版。";
+        showRetryUI();
+        return;
+      }
+
+      $status.textContent = "正在嘗試開啟 App…";
+      openAppLink(false);
+
+      // 在 AUTOTRY_TIMEOUT 內若沒切走，就顯示重試 UI
+      autoTimer = setTimeout(() => {
+        if (!switchedAway) {
+          showRetryUI();
+        }
+      }, AUTOTRY_TIMEOUT);
+    }
+
+    // 執行
+    window.addEventListener("load", autoTryOnce, { once: true });
+  </script>
+</body>
+</html>
